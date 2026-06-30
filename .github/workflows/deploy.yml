@@ -2,8 +2,8 @@ name: 生成股票日报
 
 on:
   schedule:
-    - cron: '0 0,4,8 * * 1-5'   # 北京时间 8:00, 12:00, 16:00（周一到周五）
-  workflow_dispatch:              # 可以手动触发
+    - cron: '0 0,4,8 * * 1-5'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,6 +22,7 @@ jobs:
           python-version: '3.11'
       - name: 生成日报
         run: python generate.py
+        timeout-minutes: 5
       - name: 上传产物
         uses: actions/upload-pages-artifact@v3
         with:
