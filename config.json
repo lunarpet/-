@@ -1,0 +1,9 @@
+{
+  "title": "炒股日报",
+  "portfolio": [
+    {"code": "600519", "market": "1", "name": "贵州茅台", "shares": 100},
+    {"code": "000858", "market": "0", "name": "五粮液", "shares": 500},
+    {"code": "300750", "market": "0", "name": "宁德时代", "shares": 200}
+  ],
+  "slogan": "仅作参考"
+}
