@@ -1,0 +1,31 @@
+name: 生成股票日报
+
+on:
+  schedule:
+    - cron: '0 0,4,8 * * 1-5'   # 北京时间 8:00, 12:00, 16:00（周一到周五）
+  workflow_dispatch:              # 可以手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 生成日报
+        run: python generate.py
+      - name: 上传产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: 部署到GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
